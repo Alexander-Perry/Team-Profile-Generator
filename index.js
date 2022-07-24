@@ -19,6 +19,7 @@ const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
 const { clear, Console } = require('console');
+const template = require('./src/template');
 const colourize = '\x1b[33m%s\x1b[0m';
 
 const employees = [];
@@ -38,14 +39,26 @@ function addEmployee() {
                 case 'Finished':
                     console.log('Finished');
                     //generate HTML
-                    break;
-                default:
-                    console.log('Default');
-                    //generate HTML
+                    template.generateHTML(employees);
                     break;
             };
         });
 };
+
+// function generateHTML() {
+//     // console.log(employees);
+//     // console.log(typeof (employees));
+//     // console.log(employees[2].getName());
+//     // console.log(employees[2].getRole());
+
+//     for (const role in employees) {
+//         console.log(`${role}: Role:  ${employees[role].getRole()}`);
+//         console.log(`${role}: Name:  ${employees[role].name}`);
+//         console.log(`${role}: this.Name:  ${employees[role].name}`);
+//         console.log(`${role}: ID:  ${employees[role].getId()}`);
+//     };
+
+// };
 
 // addManager function - name, id, email, officeNumber
 function addManager() {
@@ -54,8 +67,10 @@ function addManager() {
         .then((data) => {
             const { name, id, email, officeNumber } = data;
             const manager = new Manager(name, id, email, officeNumber);
-            employees.push(manager);
             clear();
+            console.log(manager);
+            employees.push(manager);
+            
             console.log(colourize, `
             ${manager.getRole()} Added
             Name: ${name}
@@ -74,8 +89,10 @@ function addEngineer() {
         .then((data) => {
             const { name, id, email, github } = data;
             const engineer = new Engineer(name, id, email, github);
-            employees.push(engineer);
             clear();
+            console.log(engineer);
+            employees.push(engineer);
+            
             console.log(colourize, `
             ${engineer.getRole()} Added
             Name: ${name}
@@ -95,8 +112,10 @@ function addIntern() {
         .then((data) => {
             const { name, id, email, school } = data;
             const intern = new Intern(name, id, email, school);
-            employees.push(intern);
             clear();
+            console.log(intern);
+            employees.push(intern);
+            
             console.log(colourize, `
             ${intern.getRole()} Added
             Name: ${name}
