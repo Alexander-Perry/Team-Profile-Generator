@@ -18,22 +18,21 @@ const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
+const { clear, Console } = require('console');
+const colourize = '\x1b[33m%s\x1b[0m';
 
 const employees = [];
 
 function addEmployee() {
-    // Testing functions
-    console.log('employee called');
-    console.log('Employee List', employees);
-
     inquirer.prompt(Employee.questions)
         .then((data) => {
-            console.log(data.employeeType);
             switch (data.employeeType) {
                 case 'Engineer': //
+                clear();
                     addEngineer();
                     break;
                 case 'Intern':
+                    clear();
                     addIntern();
                     break;
                 case 'Finished':
@@ -50,47 +49,67 @@ function addEmployee() {
 
 // addManager function - name, id, email, officeNumber
 function addManager() {
+    console.log(colourize, '\n Add a Manager: ');
     inquirer.prompt(Manager.questions)
         .then((data) => {
             const { name, id, email, officeNumber } = data;
             const manager = new Manager(name, id, email, officeNumber);
             employees.push(manager);
-            console.log(`${manager.getRole()}:  ${manager.name} added`);
-            console.log(employees); /// TESTING ONLY
+            clear();
+            console.log(colourize, `
+            ${manager.getRole()} Added
+            Name: ${name}
+            ID: ${id}
+            email: ${email}
+            Office Number: ${officeNumber}            
+            `);
             addEmployee();
-        });        
+        });
 };
 
 // addEngineer function - name, id, email, github
 function addEngineer() {
+    console.log(colourize, '\n Add an Engineer: ');
     inquirer.prompt(Engineer.questions)
         .then((data) => {
             const { name, id, email, github } = data;
             const engineer = new Engineer(name, id, email, github);
             employees.push(engineer);
-            console.log(`${engineer.getRole()}:  ${engineer.name} added`);
+            clear();
+            console.log(colourize, `
+            ${engineer.getRole()} Added
+            Name: ${name}
+            ID: ${id}
+            email: ${email}
+            GitHub: ${github}            
+            `);
+
             addEmployee();
         });
 };
 
 // addIntern function - name, id, email, school
 function addIntern() {
+    console.log(colourize, '\n Add an Intern: ');
     inquirer.prompt(Intern.questions)
         .then((data) => {
             const { name, id, email, school } = data;
             const intern = new Intern(name, id, email, school);
             employees.push(intern);
-            console.log(`${intern.getRole()}:  ${intern.name} added`);
+            clear();
+            console.log(colourize, `
+            ${intern.getRole()} Added
+            Name: ${name}
+            ID: ${id}
+            email: ${email}
+            School: ${school}            
+            `);
             addEmployee();
         });
 };
 
-
-
-// initialise the addManager function
+// Initialise with the addManager function
 addManager();
-
-
 
 // AS A manager
 // I WANT to generate a webpage that displays my team's basic info
@@ -120,59 +139,3 @@ addManager();
 
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated
-
-
-/// BACKUP CODE FOR MANAGER QUESTIONS
- // const questions = [
-    //     { // Manager's Name
-    //         type: 'input',
-    //         name: 'name',
-    //         message: "Manager's name: ",
-    //         validate: (input) => { 
-    //             if (input) return true
-    //             else {
-    //                 console.log("Name Required");
-    //                 return false;
-    //             };
-    //         }
-    //     },
-    //     { // Manager's ID
-    //         type: 'input',
-    //         name: 'id',
-    //         message: "Manager's ID: ",
-    //         validate: (input) => {
-    //             if (input) return true;
-    //             else {
-    //                 console.log('ID Required');
-    //                 return false;
-    //             };
-    //         }
-    //     },
-    //     { // Manager's email
-    //         type: 'input',
-    //         name: 'email',
-    //         message: "Manager's email: ",
-    //         validate: (input) => {
-    //             if (input) return true;
-    //             else {
-    //                 console.log("email required");
-    //                 return false;
-    //             };
-    //         }
-
-    //     },
-    //     { // Manager's officenumber
-    //         type: 'input',
-    //         name: 'officeNumber',
-    //         message: "Manager's Office Number: ",
-    //         validate: (input) => {
-    //             if (input) return true; 
-    //             else {
-    //                 console.log("Office Number Required");
-    //                 return false;
-    //             };
-    //         }
-    //     }
-    // ];
-    
-    // const questions = manager.questions;
