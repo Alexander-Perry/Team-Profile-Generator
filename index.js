@@ -11,21 +11,84 @@
 // ├── index.js               // runs the application
 // └── package.json 
 
-//Includes
+// Includes
 const inquirer = require('inquirer');
 const fs = require('fs');
-const employee = require('./lib/employee');
-const engineer = require('./lib/engineer');
-const intern = require('./lib/intern');
-const manager = require('./lib/manager');
+const Employee = require('./lib/employee');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
+const Manager = require('./lib/manager');
 
 const employees = [];
 
-// team manager’s name, employee ID, email address, and office number
-const questions = [{
-    type: 'input',
-    name: 'name'
-}];
+function addEmployee() {
+    // Testing functions
+    console.log('employee called');
+    console.log('Employee List', employees);
+
+    inquirer.prompt(Employee.questions)
+        .then((data) => {
+            console.log(data.employeeType);
+            switch (data.employeeType) {
+                case 'Engineer': //
+                    addEngineer();
+                    break;
+                case 'Intern':
+                    addIntern();
+                    break;
+                case 'Finished':
+                    console.log('Finished');
+                    //generate HTML
+                    break;
+                default:
+                    console.log('Default');
+                    //generate HTML
+                    break;
+            };
+        });
+};
+
+// addManager function - name, id, email, officeNumber
+function addManager() {
+    inquirer.prompt(Manager.questions)
+        .then((data) => {
+            const { name, id, email, officeNumber } = data;
+            const manager = new Manager(name, id, email, officeNumber);
+            employees.push(manager);
+            console.log(`${manager.getRole()}:  ${manager.name} added`);
+            console.log(employees); /// TESTING ONLY
+            addEmployee();
+        });        
+};
+
+// addEngineer function - name, id, email, github
+function addEngineer() {
+    inquirer.prompt(Engineer.questions)
+        .then((data) => {
+            const { name, id, email, github } = data;
+            const engineer = new Engineer(name, id, email, github);
+            employees.push(engineer);
+            console.log(`${engineer.getRole()}:  ${engineer.name} added`);
+            addEmployee();
+        });
+};
+
+// addIntern function - name, id, email, school
+function addIntern() {
+    inquirer.prompt(Intern.questions)
+        .then((data) => {
+            const { name, id, email, school } = data;
+            const intern = new Intern(name, id, email, school);
+            employees.push(intern);
+            console.log(`${intern.getRole()}:  ${intern.name} added`);
+            addEmployee();
+        });
+};
+
+
+
+// initialise the addManager function
+addManager();
 
 
 
@@ -57,3 +120,59 @@ const questions = [{
 
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated
+
+
+/// BACKUP CODE FOR MANAGER QUESTIONS
+ // const questions = [
+    //     { // Manager's Name
+    //         type: 'input',
+    //         name: 'name',
+    //         message: "Manager's name: ",
+    //         validate: (input) => { 
+    //             if (input) return true
+    //             else {
+    //                 console.log("Name Required");
+    //                 return false;
+    //             };
+    //         }
+    //     },
+    //     { // Manager's ID
+    //         type: 'input',
+    //         name: 'id',
+    //         message: "Manager's ID: ",
+    //         validate: (input) => {
+    //             if (input) return true;
+    //             else {
+    //                 console.log('ID Required');
+    //                 return false;
+    //             };
+    //         }
+    //     },
+    //     { // Manager's email
+    //         type: 'input',
+    //         name: 'email',
+    //         message: "Manager's email: ",
+    //         validate: (input) => {
+    //             if (input) return true;
+    //             else {
+    //                 console.log("email required");
+    //                 return false;
+    //             };
+    //         }
+
+    //     },
+    //     { // Manager's officenumber
+    //         type: 'input',
+    //         name: 'officeNumber',
+    //         message: "Manager's Office Number: ",
+    //         validate: (input) => {
+    //             if (input) return true; 
+    //             else {
+    //                 console.log("Office Number Required");
+    //                 return false;
+    //             };
+    //         }
+    //     }
+    // ];
+    
+    // const questions = manager.questions;

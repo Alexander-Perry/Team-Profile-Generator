@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/Alexander-Perry/Team-Profile-Generator/issues"
   },
-  "homepage": "https://github.com/Alexander-Perry/Team-Profile-Generator#readme"
+  "homepage": "https://github.com/Alexander-Perry/Team-Profile-Generator#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "inquirer": "^8.2.4"
+  }
 }
