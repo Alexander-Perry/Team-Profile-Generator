@@ -24,6 +24,8 @@ const colourize = '\x1b[33m%s\x1b[0m';
 
 const employees = [];
 
+// Add Employee function - check for employee type then trigger relevant function
+// Pass to HTML functions when Finished.
 function addEmployee() {
     inquirer.prompt(Employee.questions)
         .then((data) => {
@@ -39,26 +41,19 @@ function addEmployee() {
                 case 'Finished':
                     console.log('Finished');
                     //generate HTML
-                    template.generateHTML(employees);
+                    const htmlTemplate = template.generateHTML(employees);
+                    writeHTML(htmlTemplate);
                     break;
             };
         });
 };
 
-// function generateHTML() {
-//     // console.log(employees);
-//     // console.log(typeof (employees));
-//     // console.log(employees[2].getName());
-//     // console.log(employees[2].getRole());
+// writeHTML function
+function writeHTML(html) {
+    fs.writeFile('./dist/index.html', html, (err) =>
+                err ? console.log(err) : console.log(colourize, './dist/index.html generated'))    
+};
 
-//     for (const role in employees) {
-//         console.log(`${role}: Role:  ${employees[role].getRole()}`);
-//         console.log(`${role}: Name:  ${employees[role].name}`);
-//         console.log(`${role}: this.Name:  ${employees[role].name}`);
-//         console.log(`${role}: ID:  ${employees[role].getId()}`);
-//     };
-
-// };
 
 // addManager function - name, id, email, officeNumber
 function addManager() {
