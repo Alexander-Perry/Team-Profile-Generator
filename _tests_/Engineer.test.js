@@ -24,7 +24,7 @@ describe('Create an Engineer and getRole()', () => {
 
 // Create an Engineer and getGithub()
 describe('Create an Engineer and getGithub()', () => {
-    it('Should Create an Intern, and getGithub() should equal KellyGH', () => {
+    it('Should Create an Engineer, and getGithub() should equal KellyGH', () => {
         const engineer = new Engineer('Kelly', 3, 'Kelly@test.com', 'KellyGH');
         expect(engineer.getGithub()).toEqual('KellyGH');
     });
