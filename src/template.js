@@ -1,4 +1,4 @@
-// File to generate the HTML template...
+// File to generate the HTML template.
 
 // Loop to build the Cards for each item within each role. 
 function generateHTML(employees) {
@@ -23,7 +23,7 @@ function generateHTML(employees) {
                     <!-- ID, email, officeNumber -->
                     <div class="container card-text">
                         <div class="border p-2 m-1"> ID: ${id} </div>
-                        <div class="border p-2 m-1"> Email: <a href='${email}'>${email}</a> </div>
+                        <div class="border p-2 m-1"> Email: <a href='mailto:${email}'>${email}</a> </div>
                         <div class="border p-2 m-1"> Office: ${officeNumber} </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ function generateHTML(employees) {
                     <!-- id, email, github -->
                     <div class="container card-text">
                         <div class="border p-2 m-1"> ID: ${id} </div>
-                        <div class="border p-2 m-1"> Email: <a href='${email}'>${email}</a> </div>
+                        <div class="border p-2 m-1"> Email: <a href='mailto:${email}'>${email}</a> </div>
                         <div class="border p-2 m-1"> GitHub: <a href='https://github.com/${gitHub}'>${gitHub}</a> </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@ function generateHTML(employees) {
                     <!-- id, email, school -->
                     <div class="container card-text">
                         <div class="border p-2 m-1"> ID: ${id} </div>
-                        <div class="border p-2 m-1"> Email: <a href='${email}'>${email}</a></div>
+                        <div class="border p-2 m-1"> Email: <a href='mailto:${email}'>${email}</a></div>
                         <div class="border p-2 m-1"> School: ${school}</div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ function generateHTML(employees) {
         };
     };
 
-// Generate the HTML temple
+    // Generate the HTML temple
     const htmlTemplate = `
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +115,8 @@ function generateHTML(employees) {
         crossorigin="anonymous">
     </script>
 </html> `
-    console.log(htmlTemplate);
+
+    // Return the template
     return htmlTemplate;
 };
 
